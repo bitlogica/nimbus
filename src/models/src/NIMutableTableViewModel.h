@@ -126,6 +126,8 @@ NSIndexSet* indexSet = [self.model addSectionWithTitle:@"New section"];
 - (NSArray *)addObject:(id)object toSection:(NSUInteger)section;
 - (NSArray *)addObjectsFromArray:(NSArray *)array;
 - (NSArray *)insertObject:(id)object atRow:(NSUInteger)row inSection:(NSUInteger)section;
+- (NSArray *)insertObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
+- (NSArray *)replaceObjectAtIndexPath:(NSIndexPath *)indexPath withObject:(id)object;
 - (NSArray *)removeObjectAtIndexPath:(NSIndexPath *)indexPath;
 
 - (NSIndexSet *)addSectionWithTitle:(NSString *)title;

@@ -58,6 +58,20 @@
   return [NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:sectionIndex]];
 }
 
+- (NSArray *)insertObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+  NIDASSERT(indexPath.section >= 0 && indexPath.section < self.sections.count);
+  NITableViewModelSection *section = [self.sections objectAtIndex:indexPath.section];
+  [section.mutableRows insertObject:object atIndex:indexPath.row];
+  return [NSArray arrayWithObject:indexPath];
+}
+
+- (NSArray *)replaceObjectAtIndexPath:(NSIndexPath *)indexPath withObject:(id)object {
+  NIDASSERT(indexPath.section >= 0 && indexPath.section < self.sections.count);
+  NITableViewModelSection *section = [self.sections objectAtIndex:indexPath.section];
+  [section.mutableRows replaceObjectAtIndex:indexPath.row withObject:object];
+  return [NSArray arrayWithObject:indexPath];
+}
+
 - (NSArray *)removeObjectAtIndexPath:(NSIndexPath *)indexPath {
   NIDASSERT(indexPath.section < (NSInteger)self.sections.count);
   if (indexPath.section >= (NSInteger)self.sections.count) {
