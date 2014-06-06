@@ -46,6 +46,16 @@
 
 
 - (BOOL)shouldForwardSelector:(SEL)selector {
+  //// allow forwarding undocumented UITableViewDelegate methods
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+  if (selector == @selector(tableView:titleForSwipeAccessoryButtonForRowAtIndexPath:)) {
+    return YES;
+  } else if (selector == @selector(tableView:swipeAccessoryButtonPushedForRowAtIndexPath:)) {
+    return YES;
+  }
+#pragma clang diagnostic pop
+  
   struct objc_method_description description;
   description = protocol_getMethodDescription(@protocol(UITableViewDelegate), selector, NO, YES);
   return (description.name != NULL && description.types != NULL);
